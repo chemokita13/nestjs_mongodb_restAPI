@@ -23,22 +23,22 @@ export class ProductsController {
 
   @Post('/new')
   newPost(@Body() newProduct: NewProductDto) {
-    return 'holaa';
+    return this.productsService.createProduct(newProduct);
   }
 
   @Get()
   findAll() {
-    return this.productsService.findAll();
+    return this.productsService.getProducts();
   }
 
-  @Get(':id')
+  @Get('/find/:id')
   findOne(@Param('id') id: string) {
-    return this.productsService.findOne(+id);
+    return this.productsService.getProductByID(id);
   }
 
-  @Patch(':id')
-  update() {
-    return 0;
+  @Post('/update')
+  update(@Body() id: string, @Body() productToUpdate: NewProductDto) {
+    return this.productsService.updateProduct(id, productToUpdate);
   }
 
   @Delete(':id')
